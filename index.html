@@ -17,7 +17,7 @@
           .filter((item) => item.trim() !== "");
         const encodedUrls = sanitizedList.map((item) => {
           const encodedItem = encodeURIComponent(item.trim());
-          return `${urlDomain}/${param1}=${encodedItem}`;
+          return `${urlDomain}/?${param1}=${encodedItem}`;
         });
 
         // Display results
