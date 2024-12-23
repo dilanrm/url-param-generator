@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Params Generator</title>
+    <script>
+      function generateUrls() {
+        const urlDomain = document.getElementById("url_domain").value.trim();
+        const param1 = document.getElementById("param1").value.trim();
+        const nameList = document.getElementById("name_list").value.trim();
+        const displaySection = document.getElementById("result");
+
+        // Sanitize input
+        const sanitizedList = nameList
+          .split("\n")
+          .filter((item) => item.trim() !== "");
+        const encodedUrls = sanitizedList.map((item) => {
+          const encodedItem = encodeURIComponent(item.trim());
+          return `${urlDomain}/${param1}=${encodedItem}`;
+        });
+
+        // Display results
+        displaySection.innerHTML = "";
+        encodedUrls.forEach((url) => {
+          const div = document.createElement("div");
+          div.className =
+            "flex items-center justify-between bg-gray-100 p-2 rounded mb-2";
+          div.innerHTML = `
+          <span class="text-sm">${url}</span>
+          <button class="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-700" onclick="copyToClipboard('${url}')">Copy</button>
+        `;
+          displaySection.appendChild(div);
+        });
+      }
+
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            alert("Copied to clipboard!");
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+          });
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow-md w-96">
+      <h1 class="text-xl font-bold mb-4">URL Params Generator</h1>
+
+      <!-- Form -->
+      <div class="mb-4">
+        <label for="url_domain" class="block text-sm font-medium mb-2"
+          >URL Domain</label
+        >
+        <input
+          type="text"
+          id="url_domain"
+          name="url_domain"
+          class="w-full border-gray-300 rounded px-3 py-2"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="param1" class="block text-sm font-medium mb-2"
+          >Parameter Name</label
+        >
+        <input
+          type="text"
+          id="param1"
+          name="param1"
+          class="w-full border-gray-300 rounded px-3 py-2"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="name_list" class="block text-sm font-medium mb-2"
+          >Values (one per line)</label
+        >
+        <textarea
+          id="name_list"
+          name="name_list"
+          class="w-full border-gray-300 rounded px-3 py-2 h-24"
+        ></textarea>
+      </div>
+
+      <button
+        id="submit"
+        class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-700"
+        onclick="generateUrls()"
+      >
+        Submit
+      </button>
+
+      <!-- Result Section -->
+      <div id="result" class="mt-6"></div>
+    </div>
+  </body>
+</html>
