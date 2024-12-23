@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Common patterns
+*.env
+node_modules/
+bower_components/
+dist/
+lib/
+.vscode/
+.idea/
+.DS_Store
+*.tmp
+dump.rdb
+
+# Deno-specific patterns
+deno.json
+deno.jsonc
+/_wasm/
+/_std/
+
+# Vite-specific patterns
+vite.config.mts
+vite.config.ts
+
+# Additional patterns (optional)
+*.log
+*.out
+*.pid
+npm-debug.log
+yarn-debug.log
+pnpm-debug.log
+lerna-debug.log
